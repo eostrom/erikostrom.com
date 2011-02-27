@@ -15,6 +15,7 @@
 
     var pause = makeControl('pause').hide().appendTo('body');
     var play = makeControl('play').hide().appendTo('body');
+    var controls = play.add(pause);
 
     var soundscape =
       soundManager.createSound({
@@ -27,14 +28,14 @@
 
     soundscape.play({volume: 25});
 
-    var clone = play.clone().insertAfter(play).show();
-
-    var dataKey = 'soundfactory';
+    var dataKey = 'com.erikostrom.soundfactory';
 
     function step() {
-      // TODO: pause
-      // TODO: exclude the originals
-      var movers = $('.play:visible');
+      if (Math.random() < (1.0/50)) {
+        $(controls).filter(':visible').clone().insertAfter(pause);
+      }
+
+      var movers = $('.control:visible').not(controls);
 
       movers.each(function() {
         var mover = $(this);
@@ -52,7 +53,7 @@
         data.left += data.vx;
         data.bottom += data.vy;
         data.xy -= .1;
-        data.vy -= .1;
+        data.vy -= .08;
 
         if (data.bottom < -mover.outerHeight()) {
           mover.remove();
