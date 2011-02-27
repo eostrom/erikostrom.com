@@ -1,4 +1,8 @@
 (function() {
+  if (!window.console) {
+    console = { log: function() {} }
+  }
+
   soundManager.url = 'sm/swf/';
 
   soundManager.onready(function() {
@@ -36,7 +40,6 @@
         var mover = $(this);
         var data = mover.data(dataKey)
         if (!data) {
-          console.log('no data');
           data = {
             left: parseInt(mover.css('left')),
             bottom: parseInt(mover.css('bottom')),
@@ -50,7 +53,6 @@
         data.bottom += data.vy;
         data.xy -= .1;
         data.vy -= .1;
-        console.log('vy ' + data.vy + ' ' + data.bottom);
 
         if (data.bottom < -mover.outerHeight()) {
           mover.remove();
