@@ -20,7 +20,7 @@
     var soundscape =
       soundManager.createSound({
         id: 'soundscape', url: '/sounds/soundscape.mp3',
-        onplay: function() { play.hide(); pause.show(); },
+        onplay: function() { play.hide(); pause.show(); startAnimation(); },
         onpause: function() { pause.hide(); play.show(); },
         onresume: function() { play.hide(); pause.show(); },
         onfinish: function() { pause.hide(); play.show(); }
@@ -76,6 +76,10 @@
 
       var movers = $('.control:visible').not(controls);
 
+      if (stopped() && movers.length == 0) {
+        stopAnimation();
+      }
+
       movers.each(function() {
         var mover = $(this);
         var data = mover.data(dataKey)
@@ -104,6 +108,8 @@
       });
     };
 
-    setInterval(step, 50);
+    var animation;
+    function startAnimation() { animation = setInterval(step, 50); }
+    function stopAnimation() { animation && clearInterval(animation); }
   });
 })();
