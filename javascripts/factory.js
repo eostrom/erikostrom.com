@@ -20,7 +20,7 @@
     var soundscape =
       soundManager.createSound({
         id: 'soundscape', url: '/sounds/soundscape.mp3',
-        onplay: function() { pause.show(); },
+        onplay: function() { play.hide(); pause.show(); },
         onpause: function() { pause.hide(); play.show(); },
         onresume: function() { play.hide(); pause.show(); },
         onfinish: function() { pause.hide(); play.show(); }
