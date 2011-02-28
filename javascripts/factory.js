@@ -65,8 +65,12 @@
       }
     };
 
+    function stopped() {
+      return soundscape.playState == 0 && !soundscape.paused;
+    }
+
     function step() {
-      if (Math.random() < (1.0/65)) {
+      if (Math.random() < (1.0/65) && !stopped()) {
         $(controls).filter(':visible').clone().insertAfter(pause);
       }
 
