@@ -33,23 +33,40 @@
     var steppers = {
       play: {
         start: function(mover, data) {
-          data.vx = 20;
+          data.vx = 20 + Math.random() * 2 - 1;
           data.vy = 0;
         },
         step: function(mover, data) {
-          data.xy -= .1;
+          data.xy -= .05;
           data.vy -= .08;
         }
       },
 
       pause: {
-        start: function(mover, data) {data.vy = -999},
-        step: function(mover, data) {}
+        start: function(mover, data) {
+          data.vx = 0;
+          data.vy = 3;
+        },
+        step: function(mover, data) {
+          if (data.vx < 5) { data.vx += .1; }
+          if (Math.random() < 1.0/20) {
+            data.vx += (Math.random() < 0.5 ? .1 : -.1);
+          }
+
+          data.vy -= .08;
+          if (data.vy < 1 && Math.random() < 1.0/10) {
+            data.vy += .7;
+          } else if (data.vy < -1 && Math.random() < -data.vy*.1) {
+            data.vy += 1.5;
+          } else if (data.vy > 5 && Math.random() < .1) {
+            data.vy -= 1;
+          }
+        }
       }
     };
 
     function step() {
-      if (Math.random() < (1.0/50)) {
+      if (Math.random() < (1.0/65)) {
         $(controls).filter(':visible').clone().insertAfter(pause);
       }
 
@@ -73,8 +90,8 @@
         data.bottom += data.vy;
         data.stepper.step(mover, data);
 
-        // TODO: check other edges
-        if (data.bottom < -mover.outerHeight()) {
+        if (data.bottom < -mover.outerHeight(true) ||
+            data.left > $(window).width()) {
           mover.remove();
           return;
         }
