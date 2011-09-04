@@ -1,3 +1,9 @@
 [submodule "sm"]
 	path = sm
 	url = https://github.com/scottschiller/SoundManager2.git
+[submodule "vendor/lifestream"]
+	path = vendor/lifestream
+	url = https://github.com/eostrom/jquery-lifestream
+[submodule "vendor/jquery-tmpl"]
+	path = vendor/jquery-tmpl
+	url = https://github.com/jquery/jquery-tmpl.git
