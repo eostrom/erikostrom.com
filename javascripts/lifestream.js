@@ -39,7 +39,12 @@ $("#lifestream .events").lifestream({
     { service: "twitter", user: "erikostrom" },
     { service: "youtube", user: "eostrom",
       template: {
-        favorited: '&hearts; <a href="${video.player.default}" title="${video.description}">${video.title}</a>'
+        favorited: '&hearts; <a href="${video.player.default}" title="${video.description}">${video.title}</a>',
+        uploaded: 'uploaded <a href="${video.player.default}" '
+        + 'title="${video.description}">'
+        + '${video.title}<br>'
+        + '<img src="${video.thumbnail.sqDefault}" alt="">'
+        + '</a>'
       }
     }
   ]
